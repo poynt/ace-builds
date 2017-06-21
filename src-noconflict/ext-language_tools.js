@@ -58,12 +58,6 @@ var SnippetManager = function() {
                 {regex: /}/, onMatch: function(val, state, stack) {
                     return [stack.length ? stack.shift() : val];
                 }},
-                {regex: /\$(?:\d+|\w+)/, onMatch: TabstopToken},
-                {regex: /\$\{[\dA-Z_a-z]+/, onMatch: function(str, state, stack) {
-                    var t = TabstopToken(str.substr(1), state, stack);
-                    stack.unshift(t[0]);
-                    return t;
-                }, next: "snippetVar"},
                 {regex: /\n/, token: "newline", merge: false}
             ],
             snippetVar: [
